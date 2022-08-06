@@ -1,23 +1,70 @@
-// DECLARACIÓN DE VARIABLES
-let repetir = true; 
+let repetir = true;
 
-// DECLARACIÓN DE FUNCIONES
-function agregarTarea() {
+const tareas=[];
+const rutinas=[];
+const metas=[];
+
+function agregarTarea(){
     let nombreTarea = prompt("¿Qué tarea debes realizar?");
-    let fechaTarea = prompt("¿Cuándo tenes que realizar la tarea?");
-    alert("Tu tarea: " + nombreTarea + " fue agregada exitosamente!\nSu fecha límite es " + fechaTarea);
+    let fechaTarea = prompt("¿Qué dia debes realizar la tarea?");
+    let nuevaTarea = new Tarea(nombreTarea, fechaTarea);
+
+    console.log(nuevaTarea);
+    tareas.push(nuevaTarea);
+    console.log(tareas);
+    nuevaTarea.confirmarTarea();
 }
 
-function agregarRutina() {
-    let nombreRutina = prompt("¿Qué rutina te gustaría comenzar?");
-    let diasRutina = prompt("Elige los días que quieres realizar tu rutina:\nLUNES | MARTES | MIÉRCOLES | JUEVES | VIERNES | SÁBADO | DOMINGO")
-    alert("Tu rutina: " + nombreRutina + " fue agregada exitosamente!\nTe enviaremos un recordatorio los días: " + diasRutina);
+function agregarRutina(){
+    let nombreRutina=prompt("¿Qué rutina quieres realizar?");
+    let diasRutina=prompt("¿Que días quieres realizarla?\nEscribe tu elección: LUNES | MARTES | MIERCOLES | JUEVES | VIERNES");
+    let nuevaRutina=new Rutina(nombreRutina, diasRutina);
+
+    console.log(nuevaRutina);
+    rutinas.push(nuevaRutina);
+    console.log(rutinas);
+    nuevaRutina.confirmarRutina();
 }
 
-function agregarMeta() {
-    let nombreMeta = prompt("¿Qué meta deseas alcanzar?");
-    prompt("¿Cuándo te gustaría alcanzar tu meta?");
-    alert("Tu meta: " + nombreMeta + " fue agregada exitosamente!\nSabemos que lo lograras.");
+function agregarMeta(){
+    let nombreMeta=prompt("¿Qué meta quieres alcanzar?");
+    let fechaMeta=prompt("Ingresa cuando (dd/mm/aa) quieres alcanzarla");
+    let nuevaMeta=new Meta(nombreMeta, fechaMeta);
+
+    console.log(nuevaMeta);
+    metas.push(nuevaMeta);
+    console.log(metas);
+    nuevaMeta.confirmarMeta();
+}
+
+class Tarea{
+    constructor(nombre, fecha){
+        this.nombre = nombre;
+        this.fecha = fecha;
+    }
+    confirmarTarea(){
+        alert("La tarea: " + this.nombre + " se ha agregado correctamente! Te enviaremos un recordatorio el día: " + this.fecha);
+    }
+}
+
+class Rutina{
+    constructor(nombre, dias){
+        this.nombre = nombre;
+        this.dias = dias;
+    }
+    confirmarRutina(){
+        alert("Tu rutina: " + this.nombre + " se ha agregado correctamente! Te enviaremos un recordatorio los días: " + this.dias);
+    }
+}
+
+class Meta{
+    constructor(nombre, dia){
+        this.nombre = nombre;
+        this.dia = dia;
+    }
+    confirmarMeta(){
+        alert("Tu meta: " + this.nombre + " se ha agregado correctamente!\nLo lograrás el: " + this.dia + "(o antes 😉)");
+    }
 }
 
 while (repetir == true) {
@@ -29,11 +76,11 @@ while (repetir == true) {
         agregarRutina();
     } else if (agregar.toUpperCase() == "META") {
         agregarMeta();
-    } 
+    }
 
-    let agregarOtra = prompt("¿Deseas agregar otra tarea, rutina o meta?\nEscribe SI o NO.");
+    let agregarOtra = confirm("¿Deseas agregar otra tarea, rutina o meta?");
 
-    if (agregarOtra.toUpperCase() == "NO") {
+    if (agregarOtra == false) {
         repetir = false;
     }
 }
