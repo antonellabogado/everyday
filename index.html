@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- FAVICON -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
 
     <!-- FUENTE -->
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"> 
@@ -11,48 +14,64 @@
     <!-- CSS -->
     <link rel="stylesheet" href="style.css">
 
-    <title>EVERYDAY</title>
+    <title>everyday</title>
 </head>
 
 <body>
+    <section class="d-grid container">
+        <!-- HEADER -->
+        <header class="header d-flex">     
+            <h3>Hola, tu nombre!</h3>
+            <span class="circulo d-flex"></span>
+        </header>
 
-    <!-- HEADER -->
-    <header class="header d-flex">
-        <div class="perfil">
-            <h3>Hola, Antonella!</h3>
-        </div>
-        
-        <div class="fecha"> 
-            <h3>02/08/2022</h3>
-        </div>
-    </header>
+        <nav class="nav">
+            <div class="logo"><img src="images/logo2.png" alt="Logo EVERYDAY"></div>
+            <ul>
+                <li><a href="index.html">Tareas</a></li>
+                <li><a href="paginas/rutinas.html">Rutinas</a></li>
+                <li><a href="paginas/metas.html">Metas</a></li>
+            </ul>
+        </nav>
 
-    <!-- MAIN -->
-    <main class="main d-flex">
-        <section class="tareas">
-            <h2>TAREAS</h2>
-            <p>No tienes ninguna tarea por el momento.</p>
-            <button>Agregar tarea</button>
+        <!-- MAIN -->
+        <main class="main d-flex">
+            <section class="tareas">
+                <h1>Tareas</h1>
+                <h2 class="fecha">Jueves 11 de Agosto</h2>
+                <div class="agregar-tarea">
+                    <form>
+                        <h4>¿Qué tarea debes realizar?</h4>
+                        <input type="text" placeholder="Por ej. Ir al súper" name="content" id="content" class="campos">
+                        <h4>¿Cuándo debes realizarla?</h4>
+                        <input type="date" name="date" id="date" class="campos">
+                        <h4>Selecciona una categoría</h4>
+                        <div class="opciones d-grid">
+                            <label class="d-flex campos">
+                                <input type="radio" name="categoria" id="categoria1" value="trabajo">
+                                <span class="circulo trabajo d-flex"></span>
+                                <div>Trabajo</div>
+                            </label>
+                            <label class="d-flex campos">
+                                <input type="radio" name="categoria" id="categoria2" value="personal">
+                                <span class="circulo personal d-flex"></span>
+                                <div>Personal</div>
+                            </label>
+                            <label class="d-flex campos">
+                                <input type="button" value="Agregar categoria">
+                                <div>Agregar categoría</div>
+                            </label>
+                        </div>
+                        <input type="submit" value="Agregar tarea">
+                    </form>
+                </div>
+            </section>
+        </main>
+
+        <section class="calendario">
+            <h2>Tareas AGOSTO</h2>
         </section>
-
-        <section class="rutinas">
-            <h2>RUTINAS</h2>
-            <p>No tienes ninguna rutina por el momento.</p>
-            <button>Agregar rutina</button>
-        </section>
-
-        <section class="metas">
-            <h2>METAS</h2>
-            <p>No tienes ninguna meta por el momento.</p>
-            <button>Agregar meta</button>
-        </section>
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="footer">
-        <p>Desarollado por Antonella Bogado Benuzzi</p>
-    </footer>
-
+    </section>
     <!-- JAVASCRIPT -->
     <script src="script.js"></script>
 </body>

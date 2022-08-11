@@ -6,12 +6,10 @@ const metas=[];
 
 function agregarTarea(){
     let nombreTarea = prompt("¿Qué tarea debes realizar?");
-    let fechaTarea = prompt("¿Qué dia debes realizar la tarea?");
+    let fechaTarea = prompt("¿Cuándo debes realizarla?");
     let nuevaTarea = new Tarea(nombreTarea, fechaTarea);
 
-    console.log(nuevaTarea);
     tareas.push(nuevaTarea);
-    console.log(tareas);
     nuevaTarea.confirmarTarea();
 }
 
@@ -20,21 +18,34 @@ function agregarRutina(){
     let diasRutina=prompt("¿Que días quieres realizarla?\nEscribe tu elección: LUNES | MARTES | MIERCOLES | JUEVES | VIERNES");
     let nuevaRutina=new Rutina(nombreRutina, diasRutina);
 
-    console.log(nuevaRutina);
     rutinas.push(nuevaRutina);
-    console.log(rutinas);
     nuevaRutina.confirmarRutina();
 }
 
 function agregarMeta(){
     let nombreMeta=prompt("¿Qué meta quieres alcanzar?");
-    let fechaMeta=prompt("Ingresa cuando (dd/mm/aa) quieres alcanzarla");
+    let fechaMeta=prompt("Ingresa cuando quieres alcanzarla");
     let nuevaMeta=new Meta(nombreMeta, fechaMeta);
 
-    console.log(nuevaMeta);
     metas.push(nuevaMeta);
-    console.log(metas);
     nuevaMeta.confirmarMeta();
+}
+
+function mostrar() {
+    console.log("TAREAS PENDIENTES:");
+    tareas.forEach(tarea => {
+        console.log(tarea);
+    })
+
+    console.log("METAS PENDIENTES:");
+    rutinas.forEach(rutina => {
+        console.log(rutina);
+    })
+    
+    console.log("RUTINAS PENDIENTES:");
+    metas.forEach(meta => {
+        console.log(meta);
+    })
 }
 
 class Tarea{
@@ -82,5 +93,6 @@ while (repetir == true) {
 
     if (agregarOtra == false) {
         repetir = false;
+        mostrar();
     }
 }
