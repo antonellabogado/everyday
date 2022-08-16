@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <!-- FAVICON -->
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
@@ -12,67 +13,86 @@
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"> 
     
     <!-- CSS -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
 
+    <script src="https://kit.fontawesome.com/bd302f0064.js" crossorigin="anonymous"></script>
     <title>everyday</title>
 </head>
-
 <body>
-    <section class="d-grid container">
-        <!-- HEADER -->
-        <header class="header d-flex">     
-            <h3>Hola, tu nombre!</h3>
-            <span class="circulo d-flex"></span>
-        </header>
+    <section class="app d-flex">
 
-        <nav class="nav">
-            <div class="logo"><img src="images/logo2.png" alt="Logo EVERYDAY"></div>
-            <ul>
-                <li><a href="index.html">Tareas</a></li>
-                <li><a href="paginas/rutinas.html">Rutinas</a></li>
-                <li><a href="paginas/metas.html">Metas</a></li>
+        <!-- ASIDE -->
+        <aside class="aside">
+            <img class="logo" src="images/logo2.png" alt="Logo everyday">
+            <div class="titulo-categorias d-flex">
+                <h4>Categorías</h4>
+                <i class="fa-solid fa-circle-plus"></i>
+            </div>
+            <ul class="lista-categorias">
+                <li class="item-categorias btn d-flex">
+                    Todas
+                </li>
+                <li class="item-categorias btn d-flex">
+                    Trabajo
+                </li>
+                <li class="item-categorias btn d-flex">
+                    Personal
+                </li>
             </ul>
-        </nav>
+        </aside>
 
         <!-- MAIN -->
-        <main class="main d-flex">
-            <section class="tareas">
-                <h1>Tareas</h1>
-                <h2 class="fecha">Jueves 11 de Agosto</h2>
-                <div class="agregar-tarea">
-                    <form>
-                        <h4>¿Qué tarea debes realizar?</h4>
-                        <input type="text" placeholder="Por ej. Ir al súper" name="content" id="content" class="campos">
-                        <h4>¿Cuándo debes realizarla?</h4>
-                        <input type="date" name="date" id="date" class="campos">
-                        <h4>Selecciona una categoría</h4>
-                        <div class="opciones d-grid">
-                            <label class="d-flex campos">
-                                <input type="radio" name="categoria" id="categoria1" value="trabajo">
-                                <span class="circulo trabajo d-flex"></span>
-                                <div>Trabajo</div>
-                            </label>
-                            <label class="d-flex campos">
-                                <input type="radio" name="categoria" id="categoria2" value="personal">
-                                <span class="circulo personal d-flex"></span>
-                                <div>Personal</div>
-                            </label>
-                            <label class="d-flex campos">
-                                <input type="button" value="Agregar categoria">
-                                <div>Agregar categoría</div>
-                            </label>
+        <main class="main">
+            <!-- HEADER -->
+            <header class="header d-flex">
+                <h1>¡Bienvenida, Antonella!</h1>
+                <button class="btn btn-agregar-tarea">Agregar tarea</button>
+            </header>
+
+            <!-- CARDS -->
+            <section class="d-grid card-container">
+                <div class="card">
+                    <div class="titulo-tarea d-flex">
+                        <h4>Verdulería</h4>
+                        <p class="fecha-tarea">Fecha</p>
+                    </div>
+                    <p class="descripcion">blablablablabla</p>
+                    <div class="acciones-tarea d-flex">
+                        <div class="iconos-tarea">
+                            <i class="far fa-edit"></i>
+                            <i class="far fa-trash-alt"></i>                            
                         </div>
-                        <input type="submit" value="Agregar tarea">
-                    </form>
+                        <button class="done btn">Hecho</button>
+                    </div>
                 </div>
             </section>
         </main>
 
-        <section class="calendario">
-            <h2>Tareas AGOSTO</h2>
+        <!-- MODAL -->
+        <section class="modal d-flex">
+            <div class="modal-container">
+            <h3>AGREGAR TAREA</h3>
+            <a class="modal-cerrar" href="#">cerrar</a>
+            <form action="" class="d-flex">
+                <!-- nombre tarea-->
+                <input type="text" placeholder="Nombre" name="content" id="nombre-tarea" class="campos">
+                <!-- fecha tarea -->
+                <input type="date" name="date" id="fecha-tarea" class="campos">
+                <!-- descripcion tarea -->
+                <input type="text" placeholder="Descripción" id="descripcion-tarea">
+                <!-- seleccionar categoria -->
+                <select name="" id="categoria-tarea">
+                    <option value="">Seleccionar categoría</option>
+                    <option value="">Trabajo</option>
+                    <option value="">Personal</option>
+                </select>
+                <input type="submit" value="Agregar tarea">
+            </form>
+        </div>
         </section>
     </section>
+
     <!-- JAVASCRIPT -->
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
