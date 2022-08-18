@@ -5,20 +5,28 @@ const tareas=[];
 // Modal
 const modal = document.querySelector('.modal');
 const abrirModal = document.querySelector('.btn-agregar-tarea');
-const cerrarModal = document.querySelector('.modal-cerrar');
+const cerrarModal = document.querySelector('.cerrar-modal');
 
-// Card
+// Card 
 const cardContainer = document.querySelector('.card-container');
 
+// Formulario
+const formAggTarea = document.querySelector('#form-agregar-tarea');
+
+// Saludo
+const saludo = document.querySelector('.saludo');
+
 // DEFINCIÓN DE FUNCIONES
-// Agregar tareas
-function agregarTarea(){
-    let nombreTarea = prompt("Nombre de la tarea:");
-    let fechaTarea = prompt("Fecha en la que debes realizarla:");
-    let descripcionTarea = prompt("Descripción:");
-    let nuevaTarea = new Tarea(nombreTarea, fechaTarea, descripcionTarea);
+function saludar(){
+    saludo.innerHTML=`¡Hola,  ${nombre}!`;
+}
+
+function agregarTarea(idTarea, nombreTarea, fechaTarea, descripcionTarea, categoriaTarea){
+    alert("Nueva tarea agregada con éxito!");
+    let nuevaTarea = new Tarea(idTarea, nombreTarea, fechaTarea, descripcionTarea, categoriaTarea);
 
     tareas.push(nuevaTarea);
+    dibujarCard();
 }
 
 function crearCard(tarea){
@@ -33,28 +41,14 @@ function crearCard(tarea){
     descripcion.className="descripcion";
     descripcion.innerText=tarea.descripcion;
 
-    // botón marcar tarea como realizada
-    let botonDone=document.createElement("button");
-    botonDone.className="done btn";
-    botonDone.innertText="Hecho";
-
-    // botones de editar/eliminar tarea
-    let botonEditar=document.createElement("i");
-    botonEditar.className="far fa-edit";
-    let botonEliminar=document.createElement("i");
-    botonEliminar.className="far fa-trash-alt";
-
-    // botones editar/eliminar tarea
-    let iconos=document.createElement("div");
-    iconos.className="iconos-tarea";
-    iconos.append(botonEditar);
-    iconos.append(botonEliminar);
-
-    // div acciones tarea
+    // acciones tarea
     let accionesTarea=document.createElement("div");
     accionesTarea.className="acciones-tarea d-flex";
-    accionesTarea.append(iconos);
-    accionesTarea.append(botonDone);
+    accionesTarea.innerHTML=`<div class="iconos-tarea">
+                                <i class="far fa-edit editar-tarea-${tarea.id}"></i>
+                                <i class="far fa-trash-alt eliminar-tarea-${tarea.id}"></i>
+                            </div>
+                            <button class="done-tarea-${tarea.id} btn">Hecho</button>`;
 
     // card
     let card=document.createElement("div");
@@ -79,28 +73,17 @@ function dibujarCard(){
 // DEFINICIÓN DE CLASES
 // Constructor de tareas
 class Tarea{
-    constructor(nombre, fecha, descripcion){
+    constructor(id, nombre, fecha, descripcion, categoria){
+        this.id = id;
         this.nombre = nombre;
         this.fecha = fecha;
         this.descripcion = descripcion;
+        this.categoria = categoria;
     }
 }
 
-// EJECUCIÓN DE FUNCIONES
-alert("¡Bienvenidx a everyday!\nUna app donde puedes organizar tus tareas diarias, crear nuevos hábitos y rutinas para lograr todas tus metas.");
-
-let nombre = prompt("¿Cuál es tu nombre?");
-
-let agregar = confirm(`¡Hola, ${nombre}! ¿Deseas agregar una nueva tarea?`);
-
-while (agregar == true) {
-    agregarTarea();
-    agregar = confirm(`¿Deseas agregar otra tarea?`);
-}
-
-dibujarCard();
-
 // EVENTOS
+// Abrir y cerrar modal agregar tarea
 abrirModal.onclick = (e) => {
     e.preventDefault();
     modal.classList.add('modal--show');
@@ -109,4 +92,17 @@ abrirModal.onclick = (e) => {
 cerrarModal.onclick = (e) => {
     e.preventDefault();
     modal.classList.remove('modal--show');
+}
+
+// Formulario agregar tarea
+formAggTarea.onsubmit = (e) => {
+    e.preventDefault();
+    let id = Date.now();
+    let formulario = e.target;
+    let nombre = formulario.children[0].value;
+    let fecha = formulario.children[1].value;
+    let descripcion = formulario.children[2].value;
+    let categoria = formulario.children[3].value;
+    agregarTarea(id, nombre, fecha, descripcion, categoria);
+    formAggTarea.reset();
 }

@@ -161,16 +161,30 @@ body {
 
 .modal-container {
     width: 90%;
+    height: 600px;
     max-width: 600px;
-    max-height: 90%;
     margin: auto;
     padding: 1rem;
     border-radius: 6px;
     background-color: #fff;
     transform: var(--transform);
     transition: var(--transition);
+    grid-template-areas: "agg cerrar" "form form";
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.modal-container > h3 {
+    grid-area: agg;
+}
+
+.modal-container > a{
+    grid-area: cerrar;
+    text-align: right;
+    text-decoration: none;
+    color: black;
 }
 
 .modal-container > form {
+    grid-area: form;
     flex-direction: column;
 }

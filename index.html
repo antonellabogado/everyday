@@ -45,51 +45,38 @@
         <main class="main">
             <!-- HEADER -->
             <header class="header d-flex">
-                <h1>¡Bienvenida, Antonella!</h1>
+                <h1 class="saludo"></h1>
                 <button class="btn btn-agregar-tarea">Agregar tarea</button>
             </header>
 
             <!-- CARDS -->
             <section class="d-grid card-container">
-                <div class="card">
-                    <div class="titulo-tarea d-flex">
-                        <h4>Verdulería</h4>
-                        <p class="fecha-tarea">Fecha</p>
-                    </div>
-                    <p class="descripcion">blablablablabla</p>
-                    <div class="acciones-tarea d-flex">
-                        <div class="iconos-tarea">
-                            <i class="far fa-edit"></i>
-                            <i class="far fa-trash-alt"></i>                            
-                        </div>
-                        <button class="done btn">Hecho</button>
-                    </div>
-                </div>
             </section>
         </main>
 
-        <!-- MODAL -->
+        <!-- MODAL TAREA -->
         <section class="modal d-flex">
-            <div class="modal-container">
-            <h3>AGREGAR TAREA</h3>
-            <a class="modal-cerrar" href="#">cerrar</a>
-            <form action="" class="d-flex">
-                <!-- nombre tarea-->
-                <input type="text" placeholder="Nombre" name="content" id="nombre-tarea" class="campos">
-                <!-- fecha tarea -->
-                <input type="date" name="date" id="fecha-tarea" class="campos">
-                <!-- descripcion tarea -->
-                <input type="text" placeholder="Descripción" id="descripcion-tarea">
-                <!-- seleccionar categoria -->
-                <select name="" id="categoria-tarea">
-                    <option value="">Seleccionar categoría</option>
-                    <option value="">Trabajo</option>
-                    <option value="">Personal</option>
-                </select>
-                <input type="submit" value="Agregar tarea">
-            </form>
-        </div>
+            <div class="modal-container d-grid">
+                <h3>AGREGAR TAREA</h3>
+                <a class="cerrar-modal" href="">X</a>
+                <form action="" class="d-flex" id="form-agregar-tarea">
+                    <!-- nombre tarea-->
+                    <input type="text" placeholder="Nombre" name="nombre" id="nombre-tarea">
+                    <!-- fecha tarea -->
+                    <input type="date" name="date" id="fecha-tarea">
+                    <!-- descripcion tarea -->
+                    <input type="text" placeholder="Descripción" id="descripcion-tarea">
+                    <!-- seleccionar categoria -->
+                    <select name="" id="categoria-tarea">
+                        <option value="">Seleccionar categoría</option>
+                        <option value="">Trabajo</option>
+                        <option value="">Personal</option>
+                    </select>
+                    <input type="submit" value="Agregar tarea" class="btn">
+                </form>
+            </div>
         </section>
+
     </section>
 
     <!-- JAVASCRIPT -->
