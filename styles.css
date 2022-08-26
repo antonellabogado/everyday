@@ -124,6 +124,10 @@ body {
     background-color: palevioletred;
 }
 
+.acciones-tarea {
+    justify-content: flex-end;
+}
+
 .acciones-tarea i {
     margin-right: 0.6rem;
     opacity: 0.25;

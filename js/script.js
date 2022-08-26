@@ -1,7 +1,4 @@
 // DEFINICIÓN DE CONST
-// Lista de tareas
-const tareas=[];
-
 // Modal
 const modal = document.querySelector('.modal');
 const abrirModal = document.querySelector('.btn-agregar-tarea');
@@ -16,6 +13,13 @@ const formAggTarea = document.querySelector('#form-agregar-tarea');
 // Saludo
 const saludo = document.querySelector('.saludo');
 
+// Lista de tareas
+let tareas=[];
+if(localStorage.getItem('tareas')!=null){
+    tareas=JSON.parse(localStorage.getItem('tareas'));
+    dibujarCard();
+}
+
 // DEFINCIÓN DE FUNCIONES
 function saludar(){
     saludo.innerHTML=`¡Hola,  ${nombre}!`;
@@ -23,9 +27,7 @@ function saludar(){
 
 function agregarTarea(idTarea, nombreTarea, fechaTarea, descripcionTarea, categoriaTarea){
     alert("Nueva tarea agregada con éxito!");
-    let nuevaTarea = new Tarea(idTarea, nombreTarea, fechaTarea, descripcionTarea, categoriaTarea);
-
-    tareas.push(nuevaTarea);
+    tareas.push(new Tarea(idTarea, nombreTarea, fechaTarea, descripcionTarea, categoriaTarea));
     dibujarCard();
 }
 
@@ -44,11 +46,8 @@ function crearCard(tarea){
     // acciones tarea
     let accionesTarea=document.createElement("div");
     accionesTarea.className="acciones-tarea d-flex";
-    accionesTarea.innerHTML=`<div class="iconos-tarea">
-                                <i class="far fa-edit editar-tarea-${tarea.id}"></i>
-                                <i class="far fa-trash-alt eliminar-tarea-${tarea.id}"></i>
-                            </div>
-                            <button class="done-tarea-${tarea.id} btn">Hecho</button>`;
+    accionesTarea.innerHTML=`<i class="far fa-edit editar-${tarea.id}"></i>
+                        <button id="eliminar-tarea">Hecho</button>`;
 
     // card
     let card=document.createElement("div");
@@ -66,8 +65,19 @@ function dibujarCard(){
         (tarea) => {
             let card=crearCard(tarea);
             cardContainer.append(card);
+
+            eliminarTarea();
         }
     )
+    localStorage.setItem('tareas', JSON.stringify(tareas));
+}
+
+function eliminarTarea(){
+    const eliminarTareaBtn=document.getElementById('eliminar-tarea');
+
+    eliminarTareaBtn.onclick = (e) => {
+        cardContainer.removeChild(e.target.parentElement.parentElement);
+    }
 }
 
 // DEFINICIÓN DE CLASES
@@ -97,12 +107,7 @@ cerrarModal.onclick = (e) => {
 // Formulario agregar tarea
 formAggTarea.onsubmit = (e) => {
     e.preventDefault();
-    let id = Date.now();
     let formulario = e.target;
-    let nombre = formulario.children[0].value;
-    let fecha = formulario.children[1].value;
-    let descripcion = formulario.children[2].value;
-    let categoria = formulario.children[3].value;
-    agregarTarea(id, nombre, fecha, descripcion, categoria);
+    agregarTarea(Date.now(), formulario.children[0].value, formulario.children[1].value, formulario.children[2].value, formulario.children[3].value);
     formAggTarea.reset();
 }
