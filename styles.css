@@ -183,6 +183,8 @@ body {
 
 .modal-container > a{
     grid-area: cerrar;
+    width: 10px;
+    height: 10px;
     text-align: right;
     text-decoration: none;
     color: black;

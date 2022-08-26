@@ -46,8 +46,8 @@ function crearCard(tarea){
     // acciones tarea
     let accionesTarea=document.createElement("div");
     accionesTarea.className="acciones-tarea d-flex";
-    accionesTarea.innerHTML=`<i class="far fa-edit editar-${tarea.id}"></i>
-                        <button id="eliminar-tarea">Hecho</button>`;
+    accionesTarea.innerHTML=`<i class="far fa-edit btn editar-${tarea.id}"></i>
+                        <button class="btn btn-eliminar-tarea" id="btn-eliminar-tarea" tarea-id="${tarea.id}">Hecho</button>`;
 
     // card
     let card=document.createElement("div");
@@ -73,10 +73,13 @@ function dibujarCard(){
 }
 
 function eliminarTarea(){
-    const eliminarTareaBtn=document.getElementById('eliminar-tarea');
 
-    eliminarTareaBtn.onclick = (e) => {
-        cardContainer.removeChild(e.target.parentElement.parentElement);
+    cardContainer.onclick = (e) => {
+        if(e.target.tagName == 'BUTTON'){
+            const tareaId=parseInt(e.target.getAttribute('tarea-id'));
+            tareas = tareas.filter(tarea => tarea.id !== tareaId);
+            dibujarCard();
+        }
     }
 }
 
