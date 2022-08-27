@@ -26,7 +26,7 @@
             <img class="logo" src="images/logo2.png" alt="Logo everyday">
             <div class="titulo-categorias d-flex">
                 <h4>Categorías</h4>
-                <i class="fa-solid fa-circle-plus"></i>
+                <i class="fa-solid fa-circle-plus btn-agg-categoria"></i>
             </div>
             <ul class="lista-categorias">
                 <li class="item-categorias btn d-flex">
@@ -54,26 +54,33 @@
             </section>
         </main>
 
-        <!-- MODAL REGISTRO 
-        <section class="modal registro">
-
+        <!-- MODAL BIENVENIDA -->
+        <section class="modal d-flex" id="bienvenida">
+            <div class="modal-container modal-bienvenida">
+                <h2>¡Bienvenido a everyday!</h2>
+                <p>Antes de comenzar a organizar tus días, queremos conocerte.</p>
+                <p>¿Cómo es tu nombre?</p>
+                <form action="" id="form-bienvenida">
+                    <input type="text" placeholder="Ingresa tu nombre" required>
+                    <input type="submit" class="btn" value="Continuar">
+                </form>
+            </div>
         </section>
-    -->
 
         <!-- MODAL AGREGAR TAREA -->
-        <section class="modal d-flex">
-            <div class="modal-container d-grid">
+        <section class="modal d-flex" id="agregar-tarea">
+            <div class="modal-agg-tarea modal-container d-grid">
                 <h3>AGREGAR TAREA</h3>
-                <a class="cerrar-modal" href="">X</a>
+                <a class="cerrar-agg-tarea" href="">X</a>
                 <form action="" class="d-flex" id="form-agregar-tarea">
                     <!-- nombre tarea-->
-                    <input type="text" placeholder="Nombre" name="nombre" id="nombre-tarea">
+                    <input type="text" placeholder="Nombre" name="nombre" id="nombre-tarea" required>
                     <!-- fecha tarea -->
-                    <input type="date" name="date" id="fecha-tarea">
+                    <input type="date" name="date" id="fecha-tarea" required>
                     <!-- descripcion tarea -->
                     <input type="text" placeholder="Descripción" id="descripcion-tarea">
                     <!-- seleccionar categoria -->
-                    <select name="" id="categoria-tarea">
+                    <select name="" id="categoria-tarea" required>
                         <option value="">Seleccionar categoría</option>
                         <option value="">Trabajo</option>
                         <option value="">Personal</option>
@@ -84,6 +91,12 @@
         </section>
 
         <!-- MODAL AGREGAR CATEGORÍA -->
+        <section class="modal d-flex"id="agregar-categoria">
+            <div class="modal-container modal-agg-categoria">
+                <h3>AGREGAR CATEGORÍA</h3>
+                <a class="cerrar-agg-categoria" href="">X</a>
+            </div>
+        </section>
 
     </section>
 

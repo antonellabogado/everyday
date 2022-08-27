@@ -165,7 +165,6 @@ body {
 
 .modal-container {
     width: 90%;
-    height: 600px;
     max-width: 600px;
     margin: auto;
     padding: 1rem;
@@ -173,15 +172,24 @@ body {
     background-color: #fff;
     transform: var(--transform);
     transition: var(--transition);
+}
+
+.modal-bienvenida {
+    height: 300px;
+    text-align: center;
+}
+
+.modal-agg-tarea {
+    height: 600px;
     grid-template-areas: "agg cerrar" "form form";
     grid-template-columns: repeat(2, 1fr);
 }
 
-.modal-container > h3 {
+.modal-agg-tarea > h3 {
     grid-area: agg;
 }
 
-.modal-container > a{
+.modal-agg-tarea > a{
     grid-area: cerrar;
     width: 10px;
     height: 10px;
@@ -190,7 +198,7 @@ body {
     color: black;
 }
 
-.modal-container > form {
+.modal-agg-tarea > form {
     grid-area: form;
     flex-direction: column;
 }
