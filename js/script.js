@@ -14,6 +14,9 @@ const cerrarAggCategoria = document.querySelector('.cerrar-agg-categoria');
 // Card 
 const cardContainer = document.querySelector('.card-container');
 
+// Mensaje cuando no hay tareas
+const vacio = document.querySelector('.vacio');
+
 // Formularios
 const formBienvenida = document.querySelector('#form-bienvenida');
 const formAggTarea = document.querySelector('#form-agregar-tarea');
@@ -21,21 +24,37 @@ const formAggTarea = document.querySelector('#form-agregar-tarea');
 // Saludo
 const saludo = document.querySelector('.saludo');
 let usuario = localStorage.getItem('user') || '';
-usuario === ''? modalBienvenida.classList.add('modal--show') : saludar(usuario);
+// si no hay usuario en storage: mostrar bienvenida, si hay: saludar
+usuario===''? modalBienvenida.classList.add('modal--show') : saludar(usuario);
 
 // Lista de tareas
 let tareas = JSON.parse(localStorage.getItem('tareas')) || [];
 dibujarCard();
+
+// mostrar u ocultar el mensaje "no hay tareas pendientes"
+tareas.length===0? mostrarMensaje() : ocultarMensaje();
 
 // DEFINCIÓN DE FUNCIONES
 function saludar(usuario){
     saludo.innerHTML=`¡Hola, ${usuario}!`;
 }
 
+// muestra mensaje "no hay tareas pendientes"
+function mostrarMensaje(){
+    vacio.style.display = "block";
+    dibujarCard();
+}
+
+// oculta mensaje "no hay tareas pendientes"
+function ocultarMensaje(){
+    vacio.style.display = "none";
+    dibujarCard();
+}
+
 function agregarTarea(idTarea, nombreTarea, fechaTarea, descripcionTarea, categoriaTarea){
     alert("Nueva tarea agregada con éxito!");
     tareas.push(new Tarea(idTarea, nombreTarea, fechaTarea, descripcionTarea, categoriaTarea));
-    dibujarCard();
+    ocultarMensaje();
 }
 
 function crearCard(tarea){
@@ -81,16 +100,16 @@ function dibujarCard(){
     localStorage.setItem('tareas', JSON.stringify(tareas));
 }
 
+
 function editarTarea(){
     cardContainer.onclick = (e) => {
-        if(e.target.tagName.toLowerCase() === 'i'){
-          /*  const tareaId=parseInt(e.target.getAttribute('tarea-id'));
-            let tareaAEditar = tareas.find(tarea => tarea.id == tareaId); */
-            modal.classList.add('modal--show');
-        }
+       /* if(e.target.tagName.toLowerCase() === 'i'){
+            modalAggTarea.classList.add('modal--show');
+        } */
     }
 }
 
+// elimina la tarea y si no hay mas tareas muestra el mensaje
 function eliminarTarea(){
     cardContainer.onclick = (e) => {
         if(e.target.tagName.toLowerCase() === 'button'){
@@ -98,6 +117,7 @@ function eliminarTarea(){
             tareas = tareas.filter(tarea => tarea.id !== tareaId);
             dibujarCard();
         }
+        tareas.length===0 && mostrarMensaje();
     }
 }
 
