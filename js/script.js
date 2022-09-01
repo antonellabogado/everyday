@@ -11,6 +11,12 @@ const modalAggCategoria = document.querySelector('#agregar-categoria');
 const abrirAggCategoria = document.querySelector('.btn-agg-categoria');
 const cerrarAggCategoria = document.querySelector('.cerrar-agg-categoria');
 
+// Filtros por fecha
+const filtrarFechaContainer = document.querySelector('.filtrar-fecha');
+const tareasTodas = document.querySelector('.todas-fecha');
+const tareasHoy = document.querySelector('.hoy');
+const tareasSemana = document.querySelector('.semana');
+
 // Card 
 const cardContainer = document.querySelector('.card-container');
 
@@ -52,7 +58,6 @@ function ocultarMensaje(){
 }
 
 function agregarTarea(idTarea, nombreTarea, fechaTarea, descripcionTarea, categoriaTarea){
-    alert("Nueva tarea agregada con éxito!");
     tareas.push(new Tarea(idTarea, nombreTarea, fechaTarea, descripcionTarea, categoriaTarea));
     ocultarMensaje();
 }
@@ -99,7 +104,6 @@ function dibujarCard(){
     )
     localStorage.setItem('tareas', JSON.stringify(tareas));
 }
-
 
 function editarTarea(){
     cardContainer.onclick = (e) => {
@@ -171,6 +175,15 @@ formBienvenida.onsubmit = (e) => {
 formAggTarea.onsubmit = (e) => {
     e.preventDefault();
     let formulario = e.target;
-    agregarTarea(Date.now(), formulario.children[0].value, formulario.children[1].value, formulario.children[2].value, formulario.children[3].value);
+    let fecha = new Date(formulario.children[1].value).toLocaleDateString();
+    agregarTarea(Date.now(), formulario.children[0].value, fecha, formulario.children[2].value, formulario.children[3].value);
+
+    Swal.fire({
+        icon: 'success',
+        title: 'Tarea agregada con éxito!',
+        showConfirmButton: false,
+        timer: 1500
+      })
+      
     formAggTarea.reset();
 }

@@ -12,6 +12,11 @@ body {
     background-color: whitesmoke;
 }
 
+a {
+    text-decoration: none;
+    color: black;
+}
+
 .btn {
     border-radius: 15px;
     border-color: transparent;
@@ -65,10 +70,6 @@ body {
     background-color: palevioletred;
 }
 
-.active {
-
-}
-
 /* MAIN */
 .main {
     width: 100%;
@@ -100,6 +101,18 @@ body {
 
 .header .btn-agregar-tarea:hover {
     background-color: aqua;
+}
+
+.filtrar-fecha {
+    padding: 1.6rem 0 0 1.6rem;
+}
+
+.filtrar-fecha a {
+    margin-right: 1rem;
+}
+
+.filtrar-fecha a:focus {
+    font-weight: bold;
 }
 
 /* CARDS */
