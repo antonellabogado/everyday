@@ -11,12 +11,6 @@ const modalAggCategoria = document.querySelector('#agregar-categoria');
 const abrirAggCategoria = document.querySelector('.btn-agg-categoria');
 const cerrarAggCategoria = document.querySelector('.cerrar-agg-categoria');
 
-// Filtros por fecha
-const filtrarFechaContainer = document.querySelector('.filtrar-fecha');
-const tareasTodas = document.querySelector('.todas-fecha');
-const tareasHoy = document.querySelector('.hoy');
-const tareasSemana = document.querySelector('.semana');
-
 // Card 
 const cardContainer = document.querySelector('.card-container');
 
@@ -39,6 +33,14 @@ dibujarCard();
 
 // mostrar u ocultar el mensaje "no hay tareas pendientes"
 tareas.length===0? mostrarMensaje() : ocultarMensaje();
+
+const URL='https://api.thecatapi.com/v1/images/search';
+
+fetch(URL)
+    .then(resp => resp.json())
+    .then(data => {
+        document.getElementById('gatito').setAttribute('src', data[0].url);
+    });
 
 // DEFINCIÓN DE FUNCIONES
 function saludar(usuario){
