@@ -22,26 +22,19 @@
     <section class="app d-flex">
 
         <!-- ASIDE -->
-        <aside class="aside">
+        <aside class="aside d-flex">
             <img class="logo" src="images/logo2.png" alt="Logo everyday">
-            <div class="titulo-categorias d-flex">
-                <h4>Categorías</h4>
-                <i class="fa-solid fa-circle-plus btn-agg-categoria"></i>
+            <div>
+                <h4>Filtrar:</h4>
+                <ul class="lista-categorias">
+                    <li class="todas" id="todas-cat">Todas</li>
+                    <li class="trabajo" id="trabajo">Trabajo</li>
+                    <li class="estudio" id="estudio">Estudio</li>
+                    <li class="personal" id="personal">Personal</li>
+                </ul>
             </div>
-            <ul class="lista-categorias">
-                <li class="item-categorias btn d-flex">
-                    Todas
-                </li>
-                <li class="item-categorias btn d-flex">
-                    Trabajo
-                </li>
-                <li class="item-categorias btn d-flex">
-                    Personal
-                </li>
-            </ul>
 
-            <img alt="Imagen gatito random" id="gatito">
-
+            <a href="#" class="problema">¿Tienes un problema?</a>
         </aside>
 
         <!-- MAIN -->
@@ -52,6 +45,13 @@
                 <button class="btn btn-agregar-tarea">Agregar tarea</button>
             </header>
 
+         <!--   <div class="filtrar-fecha">
+                <a href="" class="todas-fecha">Todas</a>
+                <a href="" class="hoy">Hoy</a>
+                <a href="" class="semana">Esta semana</a>
+            </div>
+ -->
+            <p class="texto-categoria">Estás viendo: todas las tareas</p>
             <!-- CARDS -->
             <section class="d-grid card-container">
             </section>
@@ -75,31 +75,46 @@
 
         <!-- MODAL AGREGAR TAREA -->
         <section class="modal d-flex" id="agregar-tarea">
-            <div class="modal-agg-tarea modal-container d-grid">
-                <h3>AGREGAR TAREA</h3>
+            <div class="modal-form modal-container d-grid">
+                <h2>AGREGAR TAREA</h2>
                 <a class="cerrar-agg-tarea" href="">X</a>
                 <form action="" class="d-flex" id="form-agregar-tarea">
                     <!-- nombre tarea-->
-                    <input type="text" placeholder="Nombre" name="nombre" id="nombre-tarea" required>
+                    <label for="Nombre">Nombre de la tarea</label>
+                    <input type="text" placeholder="ej. Hacer las compras" name="nombre" id="nombre-tarea" required>
+                    <!-- fecha tarea -->
+                    <label for="Fecha">¿Cuándo tienes que realizar tu tarea?</label>
                     <input type="date" name="date" id="fecha-tarea" required> 
                     <!-- descripcion tarea -->
+                    <label for="Descripcion">Breve descripción de tu tarea (opcional)</label>
                     <input type="text" placeholder="Descripción" id="descripcion-tarea">
                     <!-- seleccionar categoria -->
+                    <label for="Categoria">Selecciona una categoría</label>
                     <select name="" id="categoria-tarea" required>
-                        <option value="">Seleccionar categoría</option>
-                        <option value="">Trabajo</option>
-                        <option value="">Personal</option>
+                        <option value="">Categoría</option>
+                        <option value="trabajo">Trabajo</option>
+                        <option value="estudio">Estudio</option>
+                        <option value="personal">Personal</option>
                     </select>
                     <input type="submit" value="Agregar tarea" class="btn">
                 </form>
             </div>
         </section>
 
-        <!-- MODAL AGREGAR CATEGORÍA -->
-        <section class="modal d-flex"id="agregar-categoria">
-            <div class="modal-container modal-agg-categoria">
-                <h3>AGREGAR CATEGORÍA</h3>
-                <a class="cerrar-agg-categoria" href="">X</a>
+        <!-- MODAL TIENES UN PROBLEMA -->
+        <section class="modal d-flex" id="problema">
+            <div class="modal-container modal-form d-grid">
+                <h2>CUENTANOS TU PROBLEMA</h2>
+                <a class="cerrar-problema" href="">X</a>
+                <form action="https://formsubmit.co/antonellabogadob@gmail.com" method="POST" id="form-problema" class="d-flex">
+                    <label for="Nombre">Nombre</label>
+                    <input type="name" name="name" required>
+                    <label for="Email">Email</label>
+                    <input type="email" name="email" id="" required>
+                    <label for="Descripcion">Descripción del problema</label>
+                    <textarea name="descripcion" id=""></textarea>
+                    <input type="submit" class="btn" value="Enviar">
+                </form>
             </div>
         </section>
 

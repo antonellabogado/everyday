@@ -1,3 +1,13 @@
+/* Variables */
+:root {
+    --body-color: rgb(220, 220, 220);
+    --white: rgb(245, 245, 245);
+    --black: rgb(22, 22, 22);
+    --trabajo: rgb(240, 81, 111);
+    --estudio: rgb(2, 213, 161);
+    --personal: rgb(39, 93, 128);
+}
+
 /* ESTILOS GENERALES */
 * {
     margin: 0;
@@ -9,12 +19,16 @@
 body {
     width: 100%;
     height: 100vh;
-    background-color: whitesmoke;
+    background-color: var(--body-color);
 }
 
 a {
     text-decoration: none;
-    color: black;
+    color: var(--black);
+}
+
+ul {
+    list-style-type: none;
 }
 
 .btn {
@@ -48,31 +62,46 @@ a {
 .aside {
     height: 100vh;
     position: sticky;
-    background-color: gainsboro;
-    padding: 1rem;
+    background-color: var(--white);
+    padding: 3rem 1rem 1rem 1rem;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.aside .titulo-categorias {
-    margin-top: 2rem;
-    justify-content: flex-start;
+.aside > div {
+    height: 90%;
 }
 
-.aside .titulo-categorias i {
-    margin-left: 1rem;
+.aside > div > h4 {
+    margin-top: 3rem;
+}
+
+.aside > div > ul > li {
+    width: 180px;
+    margin: 1rem 0;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    background-color: var(--black);
+    color: var(--white);
+    font-size: 0.9rem;
     cursor: pointer;
 }
 
-.aside .lista-categorias {
-    list-style-type: none;
+#trabajo {
+    background-color: var(--trabajo);
 }
 
-.aside .lista-categorias .item-categorias {
-    width: 150px;
-    height: 30px;
-    margin: 1rem 0;
-    padding: 1rem;
-    border-radius: 10px;
-    background-color: palevioletred;
+#estudio {
+    background-color: var(--estudio);
+}
+
+#personal {
+    background-color: var(--personal);
+}
+
+.aside > a {
+    font-size: 0.8rem;
+    font-weight: bold;
 }
 
 /* MAIN */
@@ -80,32 +109,37 @@ a {
     width: 100%;
     margin: 1rem;
     border-radius: 20px;
-    overflow-y: scroll hidden;
-    background-color: gainsboro;
+    background-color: var(--white);
 }
 
-/* HEADER */
 .header {
     width: 100%;
     height: 100px;
     position: sticky;
     border-radius: 20px 20px 0 0;
-    background-color: gray;
+    background-color: var(--black);
 }
 
 .header h1 {
     margin-left: 1rem;
+    color: var(--white);
 }
 
 .header .btn-agregar-tarea {
     width: 150px;
     height: 55px;
     margin-right: 1rem;
-    background-color: paleturquoise;
+    background-color: var(--black);
+    border-style: solid;
+    border-width: 2px;
+    border-color: var(--white);
+    color: var(--white);
 }
 
 .header .btn-agregar-tarea:hover {
-    background-color: aqua;
+    background-color: var(--white);
+    border-color: var(--black);
+    color: var(--black);
 }
 
 .filtrar-fecha {
@@ -118,6 +152,15 @@ a {
 
 .filtrar-fecha a:focus {
     font-weight: bold;
+}
+
+.texto-categoria {
+    font-size: 0.9rem;
+    padding: 1rem 1rem 0 1rem;
+}
+
+.vacio {
+    margin-left: 1rem;
 }
 
 /* CARDS */
@@ -139,7 +182,6 @@ a {
 
 .titulo-tarea {
     border-radius: 10px 10px 0 0;
-    background-color: palevioletred;
 }
 
 .acciones-tarea {
@@ -152,10 +194,13 @@ a {
     cursor: pointer;
 }
 
-.acciones-tarea .done {
+.acciones-tarea .btn-eliminar-tarea {
     width: 60px;
-    height: 20px;
+    height: 30px;
     background-color: gainsboro;
+    border-style: solid;
+    border-color: var(--black);
+    border-width: 1px;
 }
 
 /* MODAL */
@@ -183,7 +228,6 @@ a {
 .modal--show {
     opacity: 1;
     pointer-events: unset;
-    right: 400px;
     transition: opacity .6s; 
     --transform: translateY(0);
     --transition: transform .8s .7s; 
@@ -205,26 +249,65 @@ a {
     text-align: center;
 }
 
-.modal-agg-tarea {
+.modal-form {
     height: 600px;
     grid-template-areas: "agg cerrar" "form form";
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 6fr 0.1fr;
+    grid-template-rows: 1fr 4fr;
 }
 
-.modal-agg-tarea > h3 {
+.modal-form > h2 {
     grid-area: agg;
+    text-align: center;
+    margin: 0.5rem 0 0 1.5rem; 
 }
 
-.modal-agg-tarea > a{
+.modal-form > a {
     grid-area: cerrar;
     width: 10px;
     height: 10px;
     text-align: right;
     text-decoration: none;
-    color: black;
+    margin: 0.7rem;
+    color: var(--black);
 }
 
-.modal-agg-tarea > form {
+.modal-form > form {
     grid-area: form;
     flex-direction: column;
+    align-content: flex-start;
+}
+
+.modal-form > form label {
+    width: 100%;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: var(--black);
+}
+
+.modal-form> form input,
+.modal-form > form select,
+.modal-form > form textarea {
+    width: 100%;
+    height: 50px;
+    border-radius: 6px;
+    border-style: solid;
+    border-width: 1px;
+    margin-bottom: 1.5rem;
+}
+
+.modal-form > form textarea {
+    height: 200px;
+}
+.modal-form > form input[type="color"] {
+    width: 50%;
+}
+
+.modal-form > form input[type="submit"] {
+    background-color: var(--black);
+    color: var(--white);
+}
+
+.modal-form > form input[type="submit"]:hover {
+    background-color: rgb(129, 129, 129);
 }
