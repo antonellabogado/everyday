@@ -42,14 +42,6 @@ usuario===''? modalBienvenida.classList.add('modal--show') : saludar(usuario);
 // mostrar u ocultar el mensaje "no hay tareas pendientes" y la categoría visualizada
 tareas.length===0? mostrarMensaje() : ocultarMensaje();
 
-/* API */
-const URL='https://api.thecatapi.com/v1/images/search';
-fetch(URL)
-    .then(resp => resp.json())
-    .then(data => {
-        document.getElementById('gatito').setAttribute('src', data[0].url);
-    });
-
 /* EVENTOS */
 // Abrir y cerrar modal agregar tarea
 abrirAggTarea.onclick = (e) => {
@@ -95,6 +87,20 @@ formAggTarea.onsubmit = (e) => {
       })
       
     formAggTarea.reset();
+}
+
+// Formulario problema
+formProblema.onsubmit = (e) => {
+    e.preventDefault();
+
+    Swal.fire({
+        icon: 'success',
+        title: 'Mensaje enviado con éxito! Te responderemos a la brevedad',
+        showConfirmButton: false,
+        timer: 1500
+      })
+
+    formProblema.reset();
 }
 
 /* DEFINICIÓN DE CLASES */
