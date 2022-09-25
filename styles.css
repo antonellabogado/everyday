@@ -220,11 +220,6 @@ a {
     transition: var(--transition);
 }
 
-.modal-bienvenida {
-    height: 300px;
-    text-align: center;
-}
-
 .modal-form {
     height: 600px;
     grid-template-areas: "agg cerrar" "form form";
@@ -286,4 +281,17 @@ a {
 
 .modal-form > form input[type="submit"]:hover {
     background-color: rgb(129, 129, 129);
+}
+
+#modal-bienvenida {
+    height: 300px;
+    text-align: center;
+}
+
+#modal-bienvenida > p {
+    margin: 0.5rem;
+}
+
+#modal-bienvenida > form {
+    margin-top: 2rem;
 }
