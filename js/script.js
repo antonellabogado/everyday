@@ -1,3 +1,4 @@
+/* DEFINICIÓN DE CONST Y VARIABLES */
 // Modal
 const modal = document.querySelector('.modal');
 // Modal bienvenida
@@ -32,6 +33,9 @@ const textoCategoria = document.querySelector('.texto-categoria');
 const saludo = document.querySelector('.saludo');
 let usuario = localStorage.getItem('user') || '';
 
+/* Luxon */
+const DateTime = luxon.DateTime;
+
 /* EJECUCIÓN DE FUNCIONES */
 dibujarCard();
 filtrarPorCategoria();
@@ -41,6 +45,18 @@ usuario===''? modalBienvenida.classList.add('modal--show') : saludar(usuario);
 
 // mostrar u ocultar el mensaje "no hay tareas pendientes" y la categoría visualizada
 tareas.length===0? mostrarMensaje() : ocultarMensaje();
+
+/* DEFINICIÓN DE CLASES */
+// Constructor de tareas
+class Tarea{
+    constructor(id, nombre, fecha, descripcion, categoria){
+        this.id = id;
+        this.nombre = nombre;
+        this.fecha = fecha;
+        this.descripcion = descripcion;
+        this.categoria = categoria;
+    }
+}
 
 /* EVENTOS */
 // Abrir y cerrar modal agregar tarea
@@ -61,7 +77,7 @@ abrirProblema.onclick = (e) => {
 cerrarProblema.onclick = (e) => {
     e.preventDefault();
     modalProblema.classList.remove('modal--show');
-}
+} 
 
 // Formulario bienvenida
 formBienvenida.onsubmit = (e) => {
@@ -76,7 +92,7 @@ formBienvenida.onsubmit = (e) => {
 formAggTarea.onsubmit = (e) => {
     e.preventDefault();
     let formulario = e.target;
-    let fecha = new Date(formulario.children[3].value).toLocaleDateString();
+    let fecha = new DateTime.fromISO(formulario.children[3].value).toLocaleString();
     agregarTarea(Date.now(), formulario.children[1].value, fecha, formulario.children[5].value, formulario.children[7].value);
 
     Swal.fire({
@@ -101,18 +117,10 @@ formProblema.onsubmit = (e) => {
       })
 
     formProblema.reset();
-}
 
-/* DEFINICIÓN DE CLASES */
-// Constructor de tareas
-class Tarea{
-    constructor(id, nombre, fecha, descripcion, categoria){
-        this.id = id;
-        this.nombre = nombre;
-        this.fecha = fecha;
-        this.descripcion = descripcion;
-        this.categoria = categoria;
-    }
+    setTimeout( () => {
+        modalProblema.classList.remove('modal--show');
+    }, 2000)
 }
 
 /* DEFINICIÓN DE FUNCIONES */
@@ -168,9 +176,8 @@ function crearCard(tarea){
 
     // acciones tarea
     let accionesTarea=document.createElement("div");
-    accionesTarea.className="acciones-tarea d-flex";
-    accionesTarea.innerHTML=`<i class="far fa-edit btn btn-editar-tarea" id="btn-editar-tarea" tarea-id="${tarea.id}"></i>
-                           <button class="btn btn-eliminar-tarea" id="btn-eliminar-tarea" tarea-id="${tarea.id}">Hecho</button>`;
+    accionesTarea.className="acciones-tarea";
+    accionesTarea.innerHTML=`<button class="btn btn-eliminar-tarea" id="btn-eliminar-tarea" tarea-id="${tarea.id}">Hecho</button>`;
 
     // card
     let card=document.createElement("div");
@@ -182,30 +189,22 @@ function crearCard(tarea){
     return card;
 }
 
+function dibujarTareas(tarea){
+    let card=crearCard(tarea);
+    cardContainer.append(card);
+    eliminarTarea();
+}
+
 // dibuja la card de cada tarea y las guarda en el local storage
 function dibujarCard(){
     cardContainer.innerHTML="";
     tareas.forEach(
-        (tarea) => {
-            let card=crearCard(tarea);
-            cardContainer.append(card);
-            
-            editarTarea();
-            eliminarTarea();
-        }
+        (tarea) => dibujarTareas(tarea)
     )
     localStorage.setItem('tareas', JSON.stringify(tareas));
 }
 
-function editarTarea(){
-    cardContainer.onclick = (e) => {
-       /* if(e.target.tagName.toLowerCase() === 'i'){
-            modalAggTarea.classList.add('modal--show');
-        } */
-    }
-}
-
-// elimina la tarea y si no hay mas tareas muestra el mensaje
+// elimina la tarea
 function eliminarTarea(){
     cardContainer.onclick = (e) => {
         if(e.target.tagName.toLowerCase() === 'button'){
@@ -217,11 +216,40 @@ function eliminarTarea(){
     }
 }
 
+// categoria trabajo
+function dibujarTareasTrabajo(){
+    textoCategoria.innerText='Estás viendo la categoría: Trabajo';
+    cardContainer.innerHTML="";
+    tareasTrabajo.forEach(
+        (tarea) => dibujarTareas(tarea)
+    )
+    localStorage.setItem('tareas trabajo', JSON.stringify(tareasTrabajo));
+}
+
+// categoria estudio
+function dibujarTareasEstudio(){
+    textoCategoria.innerText='Estás viendo la categoría: Estudio';
+    cardContainer.innerHTML="";
+    tareasEstudio.forEach(
+        (tarea) => dibujarTareas(tarea)
+    )
+    localStorage.setItem('tareas estudio', JSON.stringify(tareasEstudio));
+}
+
+// categoria personal
+function dibujarTareasPersonal(){
+    textoCategoria.innerText='Estás viendo la categoría: Personal';
+    cardContainer.innerHTML="";
+    tareasPersonal.forEach(
+        (tarea) => dibujarTareas(tarea)
+    )
+    localStorage.setItem('tareas personal', JSON.stringify(tareasPersonal));
+}
+
 function filtrarPorCategoria(){
     listaCategorias.onclick = (e) => {
         if (e.target.className === 'todas' ) {
-            tareas = JSON.parse(localStorage.getItem('tareas'));
-            textoCategoria.innerText='Estás viendo: todas las tareas';
+            textoCategoria.innerText='Estás viendo la categoría: Todas';
             dibujarCard();
         } else if (e.target.className === 'trabajo') {
             tareasTrabajo = tareas.filter(tarea => tarea.categoria == 'trabajo');
@@ -232,51 +260,9 @@ function filtrarPorCategoria(){
         } else if (e.target.className === 'personal') {
             tareasPersonal = tareas.filter(tarea => tarea.categoria == 'personal');
             dibujarTareasPersonal();
+        } else {
+            textoCategoria.innerText='Estás viendo la categoría: Todas';
+            dibujarCard();
         }
     }
 } 
-
-function dibujarTareasTrabajo(){
-    textoCategoria.innerText='Estás viendo: Trabajo';
-    cardContainer.innerHTML="";
-          tareasTrabajo.forEach(
-            (tarea) => {
-            let card=crearCard(tarea);
-            cardContainer.append(card);
-            
-            editarTarea();
-            eliminarTarea();
-        }
-    )
-    localStorage.setItem('tareas trabajo', JSON.stringify(tareasTrabajo));
-}
-
-function dibujarTareasEstudio(){
-    textoCategoria.innerText='Estás viendo: Estudio';
-    cardContainer.innerHTML="";
-          tareasEstudio.forEach(
-            (tarea) => {
-            let card=crearCard(tarea);
-            cardContainer.append(card);
-            
-            editarTarea();
-            eliminarTarea();
-        }
-    )
-    localStorage.setItem('tareas estudio', JSON.stringify(tareasEstudio));
-}
-
-function dibujarTareasPersonal(){
-    textoCategoria.innerText='Estás viendo: Personal';
-    cardContainer.innerHTML="";
-          tareasPersonal.forEach(
-            (tarea) => {
-            let card=crearCard(tarea);
-            cardContainer.append(card);
-            
-            editarTarea();
-            eliminarTarea();
-        }
-    )
-    localStorage.setItem('tareas personal', JSON.stringify(tareasPersonal));
-}
